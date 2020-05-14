@@ -70,6 +70,8 @@ Public APIs within each product can be leveraged to quickly customize the deploy
 * Enabled OIDC Protocol, updates friendly hostname
 * Builds PingDirectory Data Store, PCV, Login Form, Policy Contract, AuthN Policy and sample SAML Connection
 
+### PingDirectory
+
 [Postman Collection](https://www.getpostman.com/collections/7c6234cfd5a61ad41d94)
 
 * Creates sample user (michael@example.com / 2FederateM0re)
