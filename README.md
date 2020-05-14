@@ -86,6 +86,7 @@ Assuming that we are on a Centos Host and I have created 3 DNS CNAMEs that point
 
 ```bash
 git clone https://github.com/mdeller-ping/proof-of-demo-quickstart
+cd proof-of-demo-quickstart
 vi devops
 sudo yum install -y docker docker-compose
 sudo docker-compose up -d
