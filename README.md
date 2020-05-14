@@ -21,13 +21,34 @@ docker-compose logs -f
 
 ## Persisting Your Configuration
 
-By default, your data will persist within the volumes/ directory, which is created during your initial startup.  To ensure your configuration is not overwritten during a restart, after your initial startup you will edit **docker-compose.yaml** and comment out the environment section of each product.  With these sections commented out, no server profile will overwrite your data.  Explained a different way:
+By default, your data will persist within the volumes/ directory, which is created during your initial startup.  To ensure your configuration is not overwritten during a restart, after your initial startup you will edit **docker-compose.yaml** and comment out the environment section of each product.  With these sections commented out, no server profile will overwrite your data.
+
+Explained a different way:
 
 1. Start your containers using `docker-compose up -d`
 2. Comment out `environment` sections within **docker-compose.yaml**
 3. Make any needed configuration changes
 4. Stop and start your containers as needed
 5. Repeat steps 3 & 4 as required without losing your data
+
+```
+services:
+  pingfederate:
+    image: pingidentity/pingfederate:10.0.2-alpine-edge
+    command: wait-for pingdirectory:389 -t 600 -- entrypoint.sh start-server
+    # environment:
+      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      # - SERVER_PROFILE_PATH=getting-started/pingfederate
+    volumes:
+      - ./volumes/pingfederate:/opt/out
+    secrets:
+      - devops-secret
+    ports:
+      - "8031:9031"
+      - "8999:9999"
+    networks:
+      - pingnet
+```
 
 ## What You Get
 
