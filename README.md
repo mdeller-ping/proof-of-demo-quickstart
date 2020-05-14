@@ -50,6 +50,27 @@ services:
       - pingnet
 ```
 
-## What You Get
-
 ## Making It Your Own
+
+Public APIs within each product can be leveraged to quickly customize the deployment.  Provided are three Postman collections to get you started.
+
+### PingAccess
+
+[Postman Collection](https://www.getpostman.com/collections/ad7419cdaa178a76e80f)
+
+* Deletes Port 3000 engine listener, creates listeners on Ports 80 and 443
+* Switches to Production ACME Servers from Let's Encrypt
+* Creats a Keypair for both PingAccess and PingFederate
+* Proxies requests to PingFederate, taking advantage of the trusted certificate
+
+### PingFederate
+
+[Postman Collection](https://www.getpostman.com/collections/57db4b3addf4693be1b8)
+
+* Enabled OIDC Protocol, updates friendly hostname
+* Builds PingDirectory Data Store, PCV, Login Form, Policy Contract, AuthN Policy and sample SAML Connection
+
+[Postman Collection](https://www.getpostman.com/collections/7c6234cfd5a61ad41d94)
+
+* Creates sample user (michael@example.com / 2FederateM0re)
+
