@@ -2,6 +2,10 @@
 
 Deploys and starts PingFederate, PingAccess, PingDirectory and Console on your docker host to quickly get started with a Proof of Concept or Demo.
 
+As configured, PingAccess will act as a reverse proxy to PingFederate (for both Runtime and Admin).
+
+![Network Overview](https://github.com/mdeller-ping/proof-of-demo-quickstart/blob/master/Network%20Overview.png)
+
 ## Prerequisites
 
 * [Docker](https://docs.docker.com/get-docker/)
