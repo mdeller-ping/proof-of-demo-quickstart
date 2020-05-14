@@ -11,9 +11,9 @@ services:
   pingfederate:
     image: pingidentity/pingfederate:10.0.2-alpine-edge
     command: wait-for pingdirectory:389 -t 600 -- entrypoint.sh start-server
-    # environment:
-      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
-      # - SERVER_PROFILE_PATH=getting-started/pingfederate
+    environment:
+      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      - SERVER_PROFILE_PATH=getting-started/pingfederate
     volumes:
       - ./volumes/pingfederate:/opt/out
     secrets:
@@ -26,9 +26,9 @@ services:
 
   pingaccess:
     image: pingidentity/pingaccess:6.0.1-alpine-edge
-    # environment:
-      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
-      # - SERVER_PROFILE_PATH=getting-started/pingaccess
+    environment:
+      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      - SERVER_PROFILE_PATH=getting-started/pingaccess
     volumes:
       - ./volumes/pingaccess:/opt/out
     secrets:
@@ -44,9 +44,9 @@ services:
 
   pingdirectory:
     image: pingidentity/pingdirectory:8.0.0.1-alpine-edge
-    # environment:
-      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
-      # - SERVER_PROFILE_PATH=getting-started/pingdirectory
+    environment:
+      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      - SERVER_PROFILE_PATH=getting-started/pingdirectory
     volumes:
       - ./volumes/pingdirectory:/opt/out
     secrets:
