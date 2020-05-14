@@ -1,0 +1,76 @@
+version: "3.5"
+                    
+secrets:
+  devops-secret:
+    file: ./devops
+
+networks:
+  pingnet:
+
+services:
+  pingfederate:
+    image: pingidentity/pingfederate:10.0.2-alpine-edge
+    command: wait-for pingdirectory:389 -t 600 -- entrypoint.sh start-server
+    # environment:
+      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      # - SERVER_PROFILE_PATH=getting-started/pingfederate
+    volumes:
+      - ./volumes/pingfederate:/opt/out
+    secrets:
+      - devops-secret
+    ports:
+      - "8031:9031"
+      - "8999:9999"
+    networks:
+      - pingnet
+
+  pingaccess:
+    image: pingidentity/pingaccess:6.0.1-alpine-edge
+    # environment:
+      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      # - SERVER_PROFILE_PATH=getting-started/pingaccess
+    volumes:
+      - ./volumes/pingaccess:/opt/out
+    secrets:
+      - devops-secret
+    ports:
+      - "80:80"
+      - "443:443"
+      - "9000:9000"
+      - "9999:9999"
+      - "9031:9031"
+    networks:
+      - pingnet
+
+  pingdirectory:
+    image: pingidentity/pingdirectory:8.0.0.1-alpine-edge
+    # environment:
+      # - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      # - SERVER_PROFILE_PATH=getting-started/pingdirectory
+    volumes:
+      - ./volumes/pingdirectory:/opt/out
+    secrets:
+      - devops-secret
+    ulimits:
+      nproc:
+        soft: 16384
+        hard: 16384
+      nofile:
+        soft: 65535
+        hard: 65535
+    ports:
+      - "1389:389"
+      - "1636:636"
+      - "1443:443"
+    networks:
+      - pingnet
+
+  pingdataconsole:
+    image: pingidentity/pingdataconsole:8.0.0.1-alpine-edge
+    volumes:
+      - ./volumes/pingdataconsole:/opt/out
+    ports:
+      - "8443:8443"
+    networks:
+      - pingnet
+
