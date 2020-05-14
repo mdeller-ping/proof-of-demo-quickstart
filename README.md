@@ -84,7 +84,7 @@ Public APIs within each product can be leveraged to quickly customize the deploy
 
 Assuming that we are on a Centos Host and I have created 3 DNS CNAMEs that point to my host:
 
-```bash
+```
 git clone https://github.com/mdeller-ping/proof-of-demo-quickstart
 cd proof-of-demo-quickstart
 vi devops
