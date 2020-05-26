@@ -36,9 +36,10 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "8443:8443"
       - "9000:9000"
-      - "9999:9999"
       - "9031:9031"
+      - "9999:9999"
     networks:
       - pingnet
 
@@ -65,12 +66,34 @@ services:
     networks:
       - pingnet
 
+  pingdatasync:
+    image: pingidentity/pingdatasync:8.0.0.1-alpine-edge
+    environment:
+      - SERVER_PROFILE_URL=https://github.com/pingidentity/pingidentity-server-profiles.git
+      - SERVER_PROFILE_PATH=simple-sync/pingdatasync
+    secrets:
+      - devops-secret
+    volumes:
+      - ./volumes/pingdatasync:/opt/out
+    ulimits:
+      nproc:
+        soft: 16384
+        hard: 16384
+      nofile:
+        soft: 65535
+        hard: 65535
+    ports:
+      - "2636:636"
+      - "2443:443"
+    networks:
+      - pingnet
+
   pingdataconsole:
     image: pingidentity/pingdataconsole:8.0.0.1-alpine-edge
     volumes:
       - ./volumes/pingdataconsole:/opt/out
     ports:
-      - "8443:8443"
+      - "7443:8443"
     networks:
       - pingnet
 
