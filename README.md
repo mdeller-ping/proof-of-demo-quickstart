@@ -89,6 +89,7 @@ git clone https://github.com/mdeller-ping/proof-of-demo-quickstart
 cd proof-of-demo-quickstart
 vi devops
 sudo yum install -y docker docker-compose
+sudo service docker start
 sudo docker-compose up -d
 ```
 
